@@ -1,13 +1,13 @@
 package typedefs;
     typedef enum logic [2:0] {
-        HLT = 3'b0;
-        SKZ = 3'b001;
-        ADD = 3'b010;
-        AND = 3'b011;
-        XOR = 3'b100;
-        LDA = 3'b101;
-        STP = 3'b110;
-        JMP = 3'b111;
+        HLT = 3'b0,
+        SKZ = 3'b001,
+        ADD = 3'b010,
+        AND = 3'b011,
+        XOR = 3'b100,
+        LDA = 3'b101,
+        STP = 3'b110,
+        JMP = 3'b111
     } opcode_t;
     
     typedef enum logic [7:0] {
