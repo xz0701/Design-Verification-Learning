@@ -10,15 +10,6 @@ module mem_test();
     logic [7:0] rd_data;
     int errors;
 
-    mem mem0(
-        .clk(clk),
-        .read(read),
-        .write(write),
-        .addr(addr),
-        .data_in(data_in),
-        .data_out(data_out)
-    );
-
     task automatic write_mem(input logic [4:0] wr_addr, 
                              input logic [7:0] wr_data,
                              input bit debug = 0);
@@ -98,11 +89,6 @@ module mem_test();
         comp_data_addr(errors);
         print_status(errors);
         $finish;
-    end
-
-    initial begin
-        $dumpfile("mem_test.vcd");
-        $dumpvars(0);
     end
     
 endmodule

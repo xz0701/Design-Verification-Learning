@@ -16,14 +16,9 @@
 //  The read and write signals should not be simultaneously high.
 // 
 ///////////////////////////////////////////////////////////////////////////
-
+`include "mem_if.sv"
 module mem (
-  input        clk,
-	input        read,
-	input        write, 
-	input  logic [4:0] addr  ,
-	input  logic [7:0] data_in  ,
-  output logic [7:0] data_out
+  mem_if.DUT bus
 );
 // SYSTEMVERILOG: timeunit and timeprecision specification
 timeunit 1ns;
@@ -32,13 +27,13 @@ timeprecision 1ns;
 // SYSTEMVERILOG: logic data type
 logic [7:0] memory [0:31] ;
   
-  always @(posedge clk)
-    if (write && !read)
+  always @(posedge bus.clk)
+    if (bus.write && !bus.read)
 // SYSTEMVERILOG: time literals
-      #1 memory[addr] <= data_in;
+      #1 memory[bus.addr] <= bus.data_in;
 
 // SYSTEMVERILOG: always_ff and iff event control
-  always_ff @(posedge clk iff ((read == '1)&&(write == '0)) )
-      data_out <= memory[addr];
+  always_ff @(posedge clk iff ((bus.read == '1)&&(bus.write == '0)) )
+      bus.data_out <= memory[bus.addr];
 
 endmodule
